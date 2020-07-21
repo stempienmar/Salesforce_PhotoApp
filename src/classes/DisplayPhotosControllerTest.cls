@@ -8,6 +8,6 @@ private with sharing class DisplayPhotosControllerTest
     private static void retrievePhotosTest( )
     {
         TestDataFactory.insertPhoto( );
-        System.assert( !DisplayPhotosController.retrievePhotos( ).isEmpty( ) );
+        System.assertEquals( 1, DisplayPhotosController.getPhotos( 1, 10, '' ).total );
     }
 }

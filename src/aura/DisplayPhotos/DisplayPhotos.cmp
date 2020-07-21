@@ -1,0 +1,71 @@
+<!--
+ - Created by marta.stempien on 21.07.2020.
+ -->
+<aura:component controller="DisplayPhotosController" description="DisplayPhotos" implements="force:appHostable,lightning:isUrlAddressable">
+    <aura:attribute name="dataList"     Type="List"    default="[]"   access="private"  description="Contains list of elements to display"/>
+    <aura:attribute name="page"         Type="Integer" default="0"    access="private"  description="Used for storing number of page"/>
+    <aura:attribute name="pages"        Type="Integer" default="0"    access="private"  description="Used for storing number of all pages"/>
+    <aura:attribute name="total"        Type="Integer" default="0"    access="private"  description="Used for storing number of all records"/>
+
+    <aura:handler   name="init" value="{!this}" action="{!c.onInit}" />
+
+    <lightning:card iconName="custom:custom38" title="{!$Label.c.PhotoCatalog}">
+        <lightning:layout>
+            <lightning:input class="slds-m-left_small" aura:id="nameFilter" label="{!$Label.c.FilterTitles}" onchange="{!c.onChangeInputs}" />
+        </lightning:layout>
+        <lightning:layout>
+            <aura:if isTrue="{!empty(v.dataList)}" >
+                <lightning:layoutItem class="slds-m-left_small slds-m-top_small">
+                    {!$Label.c.NothingToShow}
+                </lightning:layoutItem>
+            </aura:if>
+        </lightning:layout>
+        <aura:if isTrue="{!not(empty(v.dataList))}" >
+            <lightning:layout>
+                <lightning:layoutItem class="slds-m-left_small slds-m-top_small">
+                    {!v.total} {!$Label.c.Results}
+                </lightning:layoutItem>
+            </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem class="slds-m-left_small slds-m-top_medium slds-m-right_small" >
+                <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                    <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="">Title</div></th>
+                        <th scope="col"><div class="slds-truncate" title="">URL</div></th>
+                        <th scope="col"><div class="slds-truncate" title="">Thumbnail</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <aura:iteration items="{!v.dataList}" var ="loopPhoto">
+                        <c:PhotoItem item="{!loopPhoto}" />
+                    </aura:iteration>
+                    </tbody>
+                </table>
+
+            </lightning:layoutItem>
+        </lightning:layout>
+        </aura:if>
+
+        <lightning:layout>
+            <lightning:layoutItem size="12" class="slds-align_absolute-center slds-m-top_small">
+                <lightning:button disabled="{!v.page == 1}" variant="brand" label="{!$Label.c.PreviousPage}" onclick="{! c.navigate }" />
+                <lightning:button disabled="{!v.page == v.pages}" aura:id="nextPage" variant="brand" label"{!$Label.c.NextPage}" onclick="{! c.navigate }" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout>
+                <lightning:layoutItem size="12" class="slds-text-align_center slds-m-top_small"> {!$Label.c.Page} {!v.page} / {!v.pages} </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem size="5"></lightning:layoutItem>
+            <lightning:layoutItem class="slds-m-top_x-small" size="2">
+                <ui:inputSelect class="slds-text-align-right" aura:id="recordSize" change="{!c.onChangeInputs}">
+                    <ui:inputSelectOption text="10"  label="10" value="true"/>
+                    <ui:inputSelectOption text="50"  label="50"/>
+                    <ui:inputSelectOption text="100" label="100"/>
+                </ui:inputSelect>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="5"></lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>
