@@ -47,6 +47,27 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Page</shortDescription>
-        <value>Page</value>
+        <value>Page </value>
+    </labels>
+    <labels>
+        <fullName>SendAsEmail</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Send As Email</shortDescription>
+        <value>Send As Email</value>
+    </labels>
+    <labels>
+        <fullName>ToAddress</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>To: Email Address</shortDescription>
+        <value>To: Email Address</value>
+    </labels>
+    <labels>
+        <fullName>EmailSent</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Email Sent</shortDescription>
+        <value>Email Sent</value>
     </labels>
 </CustomLabels>

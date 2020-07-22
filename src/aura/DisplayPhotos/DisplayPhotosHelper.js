@@ -55,4 +55,48 @@
         page = event.getSource().get("v.label") === "Previous Page" ? (page - 1) : (page + 1);
         this.retrieveData(component, page, component.find("nameFilter").get("v.value"), component.find("recordSize").get("v.value"));
     },
+
+    /**
+    * @author Marta Stempien
+    * @date 22/07/2020
+    * @description Method calls sendEmailMessage backend method
+    */
+    sendEmail: function(component)
+    {
+       let action = component.get("c.sendEmailMessage");
+       let inputAddress = component.find("emailAddress");
+       action.setParams(
+       {
+           inToEmailAddress : inputAddress.get("v.value"),
+           inPhotos : component.get("v.dataList")
+       });
+       action.setCallback(this, $A.getCallback(function (response)
+       {
+           if ( response.getState() !== "SUCCESS" )
+           {
+               this.showToast("Error", "success");
+               return;
+           }
+           this.showToast($A.get("$Label.c.EmailSent"), "success");
+           inputAddress.set("v.value", '');
+
+       }));
+       $A.enqueueAction(action);
+    },
+
+    /**
+    * @author Marta Stempien
+    * @date 22/07/2020
+    * @description Show message toast
+    */
+    showToast: function( message, type, title )
+    {
+        let toastEvent = $A.get( "e.force:showToast" );
+        toastEvent.setParams ({
+            message: message,
+            type: type,
+            title: title,
+        } );
+        toastEvent.fire( );
+    }
 })

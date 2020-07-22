@@ -31,4 +31,14 @@
     {
        helper.navigate( component, event );
     },
+
+    /**
+    * @author Marta Stempien
+    * @date 22/07/2020
+    * @description Method calls sendEmailMessage backend method
+    */
+    sendEmail: function(component, event, helper)
+    {
+       helper.sendEmail( component );
+    },
 })

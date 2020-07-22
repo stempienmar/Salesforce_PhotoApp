@@ -149,7 +149,7 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
@@ -166,6 +166,18 @@
     </fields>
     <fields>
         <fullName>ExternalID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Corresponds to id in external system</description>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>External_ID__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>Corresponds to id in external system</description>
         <externalId>true</externalId>
@@ -212,9 +224,8 @@
         <label>All</label>
     </listViews>
     <nameField>
-        <displayFormat>P-{0000}</displayFormat>
         <label>Photo Name</label>
-        <type>AutoNumber</type>
+        <type>Text</type>
     </nameField>
     <pluralLabel>Photos</pluralLabel>
     <searchLayouts/>

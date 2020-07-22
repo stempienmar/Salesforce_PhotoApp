@@ -11,7 +11,17 @@
 
     <lightning:card iconName="custom:custom38" title="{!$Label.c.PhotoCatalog}">
         <lightning:layout>
-            <lightning:input class="slds-m-left_small" aura:id="nameFilter" label="{!$Label.c.FilterTitles}" onchange="{!c.onChangeInputs}" />
+            <lightning:layoutItem size="2">
+                <lightning:input class="slds-m-left_small" aura:id="nameFilter" label="{!$Label.c.FilterTitles}" onchange="{!c.onChangeInputs}" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout verticalAlign="end" >
+            <lightning:layoutItem flexibility="auto">
+                <lightning:input class="slds-m-left_small slds-m-top_medium" value="" aura:id="emailAddress"  placeholder="{!$Label.c.ToAddress}" type="email"  />
+            </lightning:layoutItem>
+            <lightning:layoutItem size="10" flexibility="auto">
+                <lightning:button class="slds-m-left_small " aura:id="sendEmail" variant="brand" label="{!$Label.c.SendAsEmail}" onclick="{! c.sendEmail }" />
+            </lightning:layoutItem>
         </lightning:layout>
         <lightning:layout>
             <aura:if isTrue="{!empty(v.dataList)}" >
@@ -50,7 +60,7 @@
         <lightning:layout>
             <lightning:layoutItem size="12" class="slds-align_absolute-center slds-m-top_small">
                 <lightning:button disabled="{!v.page == 1}" variant="brand" label="{!$Label.c.PreviousPage}" onclick="{! c.navigate }" />
-                <lightning:button disabled="{!v.page == v.pages}" aura:id="nextPage" variant="brand" label"{!$Label.c.NextPage}" onclick="{! c.navigate }" />
+                <lightning:button disabled="{!v.page == v.pages}" aura:id="nextPage" variant="brand" label="{!$Label.c.NextPage}" onclick="{! c.sendEmail }" />
             </lightning:layoutItem>
         </lightning:layout>
         <lightning:layout>
